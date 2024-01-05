@@ -13,19 +13,25 @@ const TaskList = () => {
 
 
   return (
-    <div>
-      <header>
-        <h1> Hola {tasks.length} </h1>
-        <Link to='/create-task'>Create task</Link>
+    <div className="w-5/6 lg:w-4/6 ">
+      <header className="flex justify-between items-center py-4">
+        <h1> Pending Task {tasks.length} </h1>
+        <Link to='/create-task' className="bg-indigo-600 px-2 py-1 rounded-sm text-sm">Create task</Link>
       </header>
-      {tasks.map((task, index)=>(
-        <div key={index}>
-          <h3>{task.title}</h3>
-          <p>{task.description}</p>
-          <button onClick={() => handleDelete(task.id)}>Delete</button>
-          <Link to={`/edit-task/${task.id}`}>Edit task</Link>
-        </div>
-      ))}
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {tasks.map((task, index) => (
+          <div key={index} className="bg-neutral-800 p-4 rounded-md">
+            <header className="flex justify-between">
+              <h3>{task.title}</h3>
+              <div className="flex gap-x-2">
+                <button onClick={() => handleDelete(task.id)} className="bg-red-500 px-2 py-1 text-xs rounded-md self-center">Delete</button>
+                <Link to={`/edit-task/${task.id}`} className="bg-zinc-600 px-2 py-1 text-xs rounded-md">Edit task</Link>
+              </div>
+            </header>
+            <p>{task.description}</p>
+          </div>
+        ))}
+      </section>
     </div>
   )
 }
